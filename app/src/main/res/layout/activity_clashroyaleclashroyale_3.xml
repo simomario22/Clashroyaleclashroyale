@@ -31,12 +31,14 @@
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView6"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/caracter3_3"
         android:ems="10"
         android:maxLength="10"
-        android:inputType="date" />
+        android:inputType="date"
+        android:layout_below="@+id/imageView6"
+        android:layout_alignRight="@+id/imageView6"
+        android:layout_alignEnd="@+id/imageView6" />
 
     <Button
         android:id="@+id/button3_1"
