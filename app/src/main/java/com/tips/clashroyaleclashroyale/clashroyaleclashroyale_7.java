@@ -29,7 +29,7 @@ public class clashroyaleclashroyale_7 extends AppCompatActivity {
 
     // url  rate button
 
-    private String rateUrl ;
+    private String rateUrl , adIdbanner ;
 
     // for if buttton
     private int a ;
@@ -39,14 +39,7 @@ public class clashroyaleclashroyale_7 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clashroyaleclashroyale_7);
 
-        // ads banner
-        View adContainer = findViewById(R.id.adMobView);
-        AdView mAdView = new AdView(this);
-        mAdView.setAdSize(AdSize.SMART_BANNER);
-        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-        ((RelativeLayout)adContainer).addView(mAdView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+
 
 
         btn1 = (Button)findViewById(R.id.button7_1);
@@ -58,6 +51,20 @@ public class clashroyaleclashroyale_7 extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 rateUrl = dataSnapshot.child("rate").getValue().toString();
+                adIdbanner  = dataSnapshot.child("ad_id_banner").getValue().toString();
+
+
+                if (dataSnapshot.exists()){
+
+                    // ads banner
+                    View adContainer = findViewById(R.id.adMobView);
+                    AdView mAdView = new AdView(getApplicationContext());
+                    mAdView.setAdSize(AdSize.SMART_BANNER);
+                    mAdView.setAdUnitId(adIdbanner);
+                    ((RelativeLayout)adContainer).addView(mAdView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
+                }
 
             }
 

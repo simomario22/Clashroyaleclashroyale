@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class clashroyaleclashroyale_2 extends AppCompatActivity {
 
-
+    // ads interstitial
+    private InterstitialAd mInterstitialAd;
 
     //  farebase
     private DatabaseReference mreferance ;
@@ -30,7 +33,7 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
     private Button  btn1 ,btn2 , btn3 , btn4 ,btn5 , btn6, btn7,  btn8 ;
 
     //  url  come from database
-    private String appUrl1 , appUrl2 ,appUrl3 ;
+    private String appUrl1 , appUrl2 ,appUrl3 ,adIdinter , adIdbanner;
 
     //  hadi  3la 9bal button bach ya cliki darori
     private int  a ,b,c;
@@ -50,17 +53,7 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
         btn7 = (Button)findViewById(R.id.button2_7);
         btn8 = (Button)findViewById(R.id.button2_8);
 
-        // ads
 
-        View adContainer = findViewById(R.id.adMobView);
-
-        AdView mAdView = new AdView(this);
-        mAdView.setAdSize(AdSize.SMART_BANNER);
-        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-        ((RelativeLayout)adContainer).addView(mAdView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        mAdView.loadAd(adRequest);
 
 
 
@@ -75,6 +68,37 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
                 appUrl1 = dataSnapshot.child("app1").getValue().toString();
                 appUrl2 = dataSnapshot.child("app2").getValue().toString();
                 appUrl3 = dataSnapshot.child("app3").getValue().toString();
+                adIdbanner = dataSnapshot.child("ads_id_banner").getValue().toString();
+                adIdinter = dataSnapshot.child("ads_id_inter").getValue().toString();
+
+                //  if data ad_id retriv from servor work
+                if (dataSnapshot.exists()){
+
+                    // ads banner programed
+                    View adContainer = findViewById(R.id.adMobView);
+                    AdView mAdView = new AdView(getApplicationContext());
+                    mAdView.setAdSize(AdSize.SMART_BANNER);
+                    mAdView.setAdUnitId(adIdbanner);
+                    ((RelativeLayout)adContainer).addView(mAdView);
+                    AdRequest adRequest = new AdRequest.Builder().build();
+                    mAdView.loadAd(adRequest);
+
+                    // ads ineterstitial
+                    mInterstitialAd = new InterstitialAd(getApplicationContext());
+                    mInterstitialAd.setAdUnitId(adIdinter);
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+                    mInterstitialAd.setAdListener(new AdListener() {
+                        @Override
+                        public void onAdClosed() {
+                            // Load the next interstitial.
+                            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                        }
+
+                    });
+
+                }
+
 
 
             }
@@ -90,9 +114,15 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // intent  with putextra
+                Intent intent = new Intent(getApplicationContext(),clashroyaleclashroyale_3.class);
+                intent.putExtra("ads",adIdbanner);
+                startActivity(intent);
 
-                    Intent intent = new Intent(getApplicationContext(),clashroyaleclashroyale_3.class);
-                    startActivity(intent);
+                // interstitial
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
 
 
             }
@@ -101,8 +131,17 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // intent with put extra
                 Intent intent = new Intent(getApplicationContext(),clashroyaleclashroyale_4.class);
+                intent.putExtra("ads",adIdbanner);
                 startActivity(intent);
+
+                // interstitial
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+
 
             }
         });
@@ -111,7 +150,14 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),clashroyaleclashroyale_5.class);
+                intent.putExtra("ads",adIdbanner);
                 startActivity(intent);
+
+                // interstitial
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+
 
             }
         });
@@ -122,7 +168,14 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getApplicationContext(),clashroyaleclashroyale_6.class);
+                intent.putExtra("ads",adIdbanner);
                 startActivity(intent);
+
+                // interstitial
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+
 
 
             }
@@ -175,12 +228,19 @@ public class clashroyaleclashroyale_2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 //  chart  hta ycliki 3la buttons b 3
 
                 if (a ==1 &&  b==1  && c== 1 ){
 
                     Intent intent = new Intent(getApplicationContext(),clashroyaleclashroyale_7.class);
                     startActivity(intent);
+
+                    // interstitial
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    }
+
 
                 }else {
 

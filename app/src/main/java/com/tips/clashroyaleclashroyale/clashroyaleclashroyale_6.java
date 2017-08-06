@@ -23,11 +23,15 @@ public class clashroyaleclashroyale_6 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clashroyaleclashroyale_6);
 
+        // extra  from clashroyaleclashroyale_2
+        String value = getIntent().getStringExtra("ads");
+
+
         // ads banner
         View adContainer = findViewById(R.id.adMobView);
         AdView mAdView = new AdView(this);
         mAdView.setAdSize(AdSize.SMART_BANNER);
-        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView.setAdUnitId(value);
         ((RelativeLayout)adContainer).addView(mAdView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);

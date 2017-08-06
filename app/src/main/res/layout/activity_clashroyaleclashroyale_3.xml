@@ -17,6 +17,18 @@
         app:srcCompat="@drawable/caracter3_1"
         tools:ignore="ContentDescription" />
 
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="190dp"
+        android:ems="10"
+        android:inputType="date"
+        android:maxLength="10" />
+
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="wrap_content"
@@ -32,21 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/caracter3_4"
-        android:layout_marginBottom="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
-        android:ems="10"
-        android:inputType="date"
-        android:maxLength="10" />
+        android:layout_marginTop="340dp" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
 
-            android:layout_marginBottom="182dp"
+
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
